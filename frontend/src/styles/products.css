@@ -1,0 +1,148 @@
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    margin-bottom: 30px;
+  }
+  
+  .products-header h1 {
+    font-size: 32px;
+  }
+  
+  .products-search {
+    width: 350px;
+  
+    padding: 14px 18px;
+  
+    border-radius: 10px;
+  
+    border: 1px solid #dbeafe;
+  
+    background: white;
+  }
+  
+  .products-grid {
+    display: grid;
+  
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(280px, 1fr)
+    );
+  
+    gap: 24px;
+  }
+
+  .modal-overlay {
+
+    position: fixed;
+  
+    inset: 0;
+  
+    background:
+    rgba(0,0,0,0.45);
+  
+    display: flex;
+  
+    justify-content: center;
+  
+    align-items: center;
+  
+    z-index: 999;
+  }
+  
+  .modal-content {
+  
+    width: 600px;
+  
+    background: white;
+  
+    border-radius: 20px;
+  
+    padding: 30px;
+  
+    box-shadow:
+    0 15px 40px
+    rgba(0,0,0,0.2);
+  }
+  
+  .modal-content h2 {
+  
+    margin-bottom: 20px;
+  }
+  
+  .modal-content p {
+  
+    margin-bottom: 12px;
+  }
+  
+  .modal-buttons {
+
+    display: flex;
+  
+    gap: 15px;
+  
+    margin-top: 30px;
+  }
+  
+  .update-btn {
+  
+    background: #2563eb;
+  
+    color: white;
+  
+    border: none;
+  
+    padding: 12px 25px;
+  
+    border-radius: 10px;
+  
+    cursor: pointer;
+  
+    font-weight: 600;
+  
+    transition: 0.3s;
+  }
+  
+  .update-btn:hover {
+  
+    background: #1d4ed8;
+  }
+  
+  .delete-btn {
+  
+    background: #dc2626;
+  
+    color: white;
+  
+    border: none;
+  
+    padding: 12px 25px;
+  
+    border-radius: 10px;
+  
+    cursor: pointer;
+  
+    font-weight: 600;
+  
+    transition: 0.3s;
+  }
+  
+  .delete-btn:hover {
+  
+    background: #b91c1c;
+  }
+
+  .modal-content input,
+  .modal-content textarea {
+
+  width: 100%;
+
+  padding: 12px;
+
+  margin-bottom: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 8px;
+}

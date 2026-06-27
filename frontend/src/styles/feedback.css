@@ -1,0 +1,46 @@
+.rating-stars{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+    }
+    
+    .star{
+    font-size:40px;
+    cursor:pointer;
+    color:#d1d5db;
+    transition:0.2s;
+    }
+    
+    .active-star{
+    color:#facc15;
+    }
+    
+    .star:hover{
+    transform:scale(1.2);
+    }
+    
+    .feedback-submit-btn{
+    
+    background:#2563eb;
+    
+    color:white;
+    
+    border:none;
+    
+    padding:12px 25px;
+    
+    border-radius:8px;
+    
+    cursor:pointer;
+    
+    font-weight:600;
+    
+    margin-top:15px;
+    
+    }
+    
+    .feedback-submit-btn:hover{
+    
+    background:#1d4ed8;
+    
+    }

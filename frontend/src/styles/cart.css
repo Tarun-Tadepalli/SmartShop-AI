@@ -1,0 +1,61 @@
+.cart-page{
+    padding:20px;
+    }
+    
+    .cart-card{
+    background:white;
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .qty-section{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    margin-top:10px;
+    }
+    
+    .qty-section button{
+    padding:5px 15px;
+    cursor:pointer;
+    }
+    
+    .remove-btn{
+    margin-top:15px;
+    background:red;
+    color:white;
+    border:none;
+    padding:10px;
+    cursor:pointer;
+    }
+    
+    .cart-total{
+    margin-top:30px;
+    text-align:right;
+    }
+    
+    .checkout-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    cursor:pointer;
+    border-radius:6px;
+    }
+    .cart-actions{
+        display:flex;
+        gap:10px;
+        margin-top:15px;
+        }
+        
+        .buy-now-btn{
+        background:#16a34a;
+        color:white;
+        border:none;
+        padding:10px 18px;
+        border-radius:8px;
+        cursor:pointer;
+        font-weight:600;
+        }

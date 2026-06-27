@@ -1,0 +1,31 @@
+import React from 'react';
+import './Login.css';
+
+function Login() {
+  return (
+    <>
+      <nav className="navbar">
+        <h1 className="navbar-heading">SmartShop Ai</h1>
+      </nav>
+      <div className="auth-container">
+        <div className="auth-card">
+          <h1>Login to continue</h1>
+          <p></p>
+          <form>
+            <input
+              type="email"
+              placeholder="Email Address"
+            />
+            <p></p>
+            <input
+              type="password"
+              placeholder="Password"
+            />
+          </form>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Login;

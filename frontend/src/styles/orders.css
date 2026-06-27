@@ -1,0 +1,195 @@
+.orders-title {
+    margin-bottom: 25px;
+  }
+  
+  .orders-card {
+    background: white;
+  
+    border-radius: 18px;
+  
+    padding: 25px;
+  
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+  
+  .orders-table {
+    width: 100%;
+  
+    border-collapse: collapse;
+  }
+  
+  .orders-table th {
+    background: #eff6ff;
+  
+    padding: 15px;
+  
+    text-align: left;
+  }
+  
+  .orders-table td {
+    padding: 15px;
+  
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .status-badge{
+
+    padding:8px 14px;
+    
+    border-radius:20px;
+    
+    font-size:13px;
+    
+    font-weight:600;
+    
+    color:white;
+    
+    }
+    
+    .pending{
+    
+    background:#ff9800;
+    
+    }
+    
+    .processing{
+    
+    background:#2196f3;
+    
+    }
+    
+    .shipped{
+    
+    background:#9c27b0;
+    
+    }
+    
+    .delivered{
+    
+    background:#4caf50;
+    
+    }
+    
+    .returned{
+    
+    background:#f44336;
+    
+    }
+
+    .track-btn{
+
+      background:#2563eb;
+      
+      color:white;
+      
+      border:none;
+      
+      padding:8px 16px;
+      
+      border-radius:6px;
+      
+      cursor:pointer;
+      
+      font-weight:600;
+      
+      }
+      
+      .track-btn:hover{
+      
+      background:#1d4ed8;
+      
+      }
+
+      .feedback-btn{
+
+        background:#16a34a;
+        
+        color:white;
+        
+        border:none;
+        
+        padding:8px 14px;
+        
+        border-radius:6px;
+        
+        cursor:pointer;
+        
+        font-weight:600;
+        
+        }
+        
+        .feedback-btn:hover{
+        
+        background:#15803d;
+        
+        }
+        
+        .return-btn{
+        
+        background:#dc2626;
+        
+        color:white;
+        
+        border:none;
+        
+        padding:8px 14px;
+        
+        border-radius:6px;
+        
+        cursor:pointer;
+        
+        font-weight:600;
+        
+        }
+        
+        .return-btn:hover{
+        
+        background:#b91c1c;
+        
+        }
+        .approve-btn{
+
+          background:#22c55e;
+          
+          color:white;
+          
+          border:none;
+          
+          padding:8px 14px;
+          
+          border-radius:6px;
+          
+          cursor:pointer;
+          
+          margin-right:8px;
+          
+          }
+          
+          .reject-btn{
+          
+          background:#ef4444;
+          
+          color:white;
+          
+          border:none;
+          
+          padding:8px 14px;
+          
+          border-radius:6px;
+          
+          cursor:pointer;
+          
+          }
+          .customer-link{
+
+            background:none;
+            
+            border:none;
+            
+            color:#2563eb;
+            
+            cursor:pointer;
+            
+            font-weight:600;
+            
+            }
