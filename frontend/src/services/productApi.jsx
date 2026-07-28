@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/products"
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/products`
 });
 
 export const addProduct = (data) => {
@@ -27,13 +27,12 @@ export const getProductById = (id) => {
 
   export const uploadProductImage = (formData) => {
     return axios.post(
-      "http://127.0.0.1:8000/api/upload/product-image",
+      `${import.meta.env.VITE_API_BASE_URL}/api/upload/product-image`,
       formData,
       {
-        headers: {
-          "Content-Type":
-            "multipart/form-data"
-        }
+          headers: {
+              "Content-Type": "multipart/form-data"
+          }
       }
-    );
+  );
   };

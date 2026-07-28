@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/profile"
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/profile`
 });
 
 export const changePassword = (data) =>
@@ -13,14 +13,14 @@ export const updateProfileImage = (data) => {
 
 export const uploadProfileImage = (formData) => {
   return axios.post(
-    "http://127.0.0.1:8000/api/upload/profile-image",
+    `${import.meta.env.VITE_API_BASE_URL}/api/upload/profile-image`,
     formData,
     {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        headers:{
+            "Content-Type":"multipart/form-data"
+        }
     }
-  );
+);
 };
 
 export const getProfile = (email) => {

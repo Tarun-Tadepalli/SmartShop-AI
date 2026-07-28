@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL:
-  "http://127.0.0.1:8000/api/analytics"
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/analytics`
 });
 
 export const getInventoryAnalysis = () => {
@@ -11,4 +10,5 @@ export const getInventoryAnalysis = () => {
   );
 
 };
-export const categoryChartUrl = "http://127.0.0.1:8000/api/analytics/category-chart";
+export const categoryChartUrl =
+`${import.meta.env.VITE_API_BASE_URL}/api/analytics/category-chart`;
