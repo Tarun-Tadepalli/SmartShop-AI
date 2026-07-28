@@ -4,13 +4,16 @@ import { getCustomerOrders }from "../services/orderApi";
 import { useNavigate }from "react-router-dom";
 import { changePassword } from "../services/profileApi";
 import {uploadProfileImage, updateProfileImage, getProfile} from "../services/profileApi";
-import "../styles/customerProfile.css";
+import "../styles/customerprofile.css";
+
 
 function CustomerProfile() {
   const navigate = useNavigate();
   const [orders,setOrders] = useState([]);
   const [showOrders,setShowOrders] = useState(false);
   const [image,setImage] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const email =localStorage.getItem("userEmail");
   const [showPasswordForm,setShowPasswordForm] = useState(false);
   const [currentPassword,setCurrentPassword] = useState("");
@@ -31,19 +34,28 @@ const [confirmPassword,setConfirmPassword] = useState("");
   };
 
   const loadProfile = async () => {
+
     try {
+  
       const response = await getProfile(email);
-      if (
-        response.data.profile_image_url
-      ) {
-        setImage(
-          response.data.profile_image_url
-        );
+  
+      setFirstName(response.data.first_name);
+      setLastName(response.data.last_name);
+  
+      if (response.data.profile_image_url) {
+  
+        setImage(response.data.profile_image_url);
+  
       }
+  
     }
-    catch(error) {
-      console.log(error); 
+  
+    catch (error) {
+  
+      console.log(error);
+  
     }
+  
   };
   
   const buyAgain =(order)=>{
@@ -114,7 +126,7 @@ const [confirmPassword,setConfirmPassword] = useState("");
           </div>
           
           <div className="profile-info">
-            <h2>Customer Profile</h2>
+          <h2>{firstName} {lastName}</h2>
             <p>Email : {email}</p>
             <p className="password-display">
               Password : ********

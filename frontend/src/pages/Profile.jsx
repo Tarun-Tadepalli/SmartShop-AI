@@ -1,4 +1,4 @@
-import MainLayout from "../components/MainLayout";
+import MainLayout from "../components/Mainlayout";
 import { useEffect,useState } from "react";
 import { getAllOrders } from "../services/orderApi";
 import { getProducts } from "../services/productApi";
@@ -11,6 +11,10 @@ function Profile() {
   const [showOrders,setShowOrders] = useState(false);
   const [showProducts,setShowProducts] = useState(false);
   const [image,setImage] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+
   useEffect(()=>{loadOrders(); loadProducts(); loadProfile();},[]);
 
   const loadOrders = async()=>{  
@@ -31,20 +35,28 @@ function Profile() {
   };
 
   const loadProfile = async () => {
+
     try {
-      const response = await getProfile(email);
-      if (
-        response.data.profile_image_url
-      ) {
   
-        setImage(
-          response.data.profile_image_url
-        );
+      const response = await getProfile(email);
+  
+      setFirstName(response.data.first_name);
+      setLastName(response.data.last_name);
+  
+      if (response.data.profile_image_url) {
+  
+        setImage(response.data.profile_image_url);
+  
       }
+  
     }
-    catch(error) {
+  
+    catch (error) {
+  
       console.log(error);
+  
     }
+  
   };
   
   const email =localStorage.getItem("userEmail");
@@ -66,7 +78,7 @@ function Profile() {
           </div>
           
           <div className="profile-info">
-            <h2>Admin Profile</h2>
+          <h2>{firstName} {lastName}</h2>
             <p>Email : {email}</p>
             <p>Role : {role}</p>
             <p>Password : ********</p>

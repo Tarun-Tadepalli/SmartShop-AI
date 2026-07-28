@@ -10,8 +10,8 @@ from app.routes.feedback_routes import router as feedback_router
 from app.routes.address_routes import router as address_router
 from app.routes.profile_routes import router as profile_router
 from app.routes.upload_routes import router as upload_router
-
-
+from app.routes.ai_routes import router as ai_router
+from app.routes.admin_ai_routes import router as admin_ai_router
 
 app = FastAPI()
 app.add_middleware(
@@ -69,6 +69,18 @@ app.include_router(
     upload_router,
     prefix="/api/upload",
     tags=["Upload"]
+)
+
+app.include_router(
+    ai_router,
+    prefix="/api/ai",
+    tags=["AI Assistant"]
+)
+
+app.include_router(
+    admin_ai_router,
+    prefix="/api/admin-ai",
+    tags=["Admin AI"]
 )
 
 @app.get("/")

@@ -7,9 +7,6 @@ def create_order(data):
 
     cursor = connection.cursor()
 
-    # --------------------------
-    # CHECK PRODUCT STOCK
-    # --------------------------
 
     cursor.execute(
         """
@@ -273,3 +270,33 @@ def request_return(order_id, reason):
         "message":
         "Return Requested"
     }
+
+def search_orders_for_ai(customer_email):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+            product_name,
+            quantity,
+            total_amount,
+            status,
+            order_date
+        FROM orders
+        WHERE customer_email=%s
+        ORDER BY order_date DESC
+        """,
+        (
+            customer_email,
+        )
+    )
+
+    orders = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return orders

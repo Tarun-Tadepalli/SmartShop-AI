@@ -2,7 +2,7 @@ import {useEffect,useState} from "react";
 
 import {useParams} from "react-router-dom";
 
-import MainLayout from "../components/MainLayout";
+import MainLayout from "../components/Mainlayout";
 
 import {getProductById} from "../services/productApi";
 

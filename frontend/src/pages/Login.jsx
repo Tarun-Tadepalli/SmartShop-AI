@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authApi";
-import "./../styles/auth.css";
+import "../styles/auth.css";
 
 
 

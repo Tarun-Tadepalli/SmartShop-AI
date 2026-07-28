@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import MainLayout from "../components/MainLayout";
+import MainLayout from "../components/Mainlayout";
 
 import {getDashboardStats} from "../services/dashboardApi";
 

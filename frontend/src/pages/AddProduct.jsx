@@ -1,6 +1,6 @@
 import { useState } from "react";
-import MainLayout from "../components/MainLayout";
-import "../styles/addProduct.css";
+import MainLayout from "../components/Mainlayout";
+import "../styles/addproduct.css"
 import { addProduct, uploadProductImage } from "../services/productApi";
 
 function AddProduct() {

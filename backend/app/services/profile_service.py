@@ -104,6 +104,7 @@ def update_profile_image(data):
     }
 
 def get_profile(email):
+
     connection = get_connection()
 
     cursor = connection.cursor()
@@ -111,7 +112,10 @@ def get_profile(email):
     cursor.execute(
         """
         SELECT
-        profile_image_url
+            first_name,
+            last_name,
+            email,
+            profile_image_url
         FROM users
         WHERE email=%s
         """,
@@ -126,9 +130,53 @@ def get_profile(email):
     if not user:
 
         return {
+            "first_name": "",
+            "last_name": "",
+            "email": "",
             "profile_image_url": None
         }
 
     return {
-        "profile_image_url": user[0]
+        "first_name": user[0],
+        "last_name": user[1],
+        "email": user[2],
+        "profile_image_url": user[3]
+    }
+
+def get_profile_for_ai(email):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+            first_name,
+            last_name,
+            email,
+            profile_image_url
+        FROM users
+        WHERE email=%s
+        """,
+        (email,)
+    )
+
+    user = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    if not user:
+        return None
+
+    return {
+        "first_name": user[0],
+        "last_name": user[1],
+        "email": user[2],
+        "profile_image": (
+            "Uploaded"
+            if user[3]
+            else "Not Uploaded"
+        )
     }
