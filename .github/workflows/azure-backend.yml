@@ -25,7 +25,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Deploy to Azure App Service
+      - name: Deploy to Azure
         uses: azure/webapps-deploy@v3
         with:
           app-name: smartshop-api-tarun-2026
