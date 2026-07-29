@@ -18,7 +18,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://orange-meadow-0cba69a00.7.azurestaticapps.net",
+        "https://happy-desert-06fafd400.7.azurestaticapps.net",
     ],
     allow_credentials=True,
     allow_methods=["*"],
