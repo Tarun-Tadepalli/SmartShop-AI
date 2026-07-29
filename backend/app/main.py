@@ -24,7 +24,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-    
+    #aaproject
 app.include_router(
     auth_router,
     prefix="/api/auth",
