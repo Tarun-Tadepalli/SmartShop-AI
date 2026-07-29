@@ -22,6 +22,8 @@ jobs:
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          VITE_API_BASE_URL: https://smartshop-api-tarun-2026-chabd0d3ajhdhta4.centralindia-01.azurewebsites.net
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_MEADOW_0CBA69A00 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
