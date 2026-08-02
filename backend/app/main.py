@@ -17,10 +17,10 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:5173",
-    "https://happy-desert-06fafd400.7.azurestaticapps.net",
-    "https://smart-shop-ai-brown.vercel.app",
-]
+        "http://localhost:5173",
+        "https://happy-desert-06fafd400.7.azurestaticapps.net",
+        "https://smart-shop-ai-brown.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
