@@ -271,3 +271,7 @@ This project is developed for educational, research, and learning purposes.
 ---
 
 ⭐ If you found this project useful, consider giving it a star.
+
+
+
+# postgresql://neondb_owner:npg_fN9PLBzKcaA8@ep-young-shadow-az6gpshc-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
