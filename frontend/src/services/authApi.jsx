@@ -11,3 +11,15 @@ export const registerUser = (data) => {
 export const loginUser = (data) => {
   return API.post("/login", data);
 };
+
+export const forgotPassword = (data) => {
+  return API.post("/forgot-password", data);
+};
+
+export const verifyOTP = (data) => {
+  return API.post("/verify-otp", data);
+};
+
+export const changePassword = (data) => {
+  return API.post("/change-password", data);
+};

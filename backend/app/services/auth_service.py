@@ -1,13 +1,14 @@
 from app.database import get_connection
 
-from app.utils.password_handler import (
-    hash_password,
-    verify_password
-)
+from app.utils.password_handler import (hash_password, verify_password)
 
-from app.utils.jwt_handler import (
-    create_access_token
-)
+from app.utils.jwt_handler import (create_access_token)
+
+from app.utils.otp_manager import generate_otp
+from app.utils.otp_manager import save_otp
+from app.utils.otp_manager import verify_otp
+
+from app.services.email_service import send_otp_email
 
 def register_user(user_data):
 
@@ -138,3 +139,73 @@ def login_user(user_data):
         "token": token,
         "role": user[5]
     }
+
+def verify_email_exists(email):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT email
+        FROM users
+        WHERE email=%s
+        """,
+        (email,)
+    )
+
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return user is not None
+
+def send_password_reset_otp(email):
+
+    if not verify_email_exists(email):
+
+        return {
+            "success": False,
+            "message": "Email not registered"
+        }
+
+    otp = generate_otp()
+
+    save_otp(email, otp)
+
+    send_otp_email(email, otp)
+
+    return {
+        "success": True,
+        "message": "OTP sent successfully"
+    }   
+
+def verify_password_reset_otp(email, otp):
+
+    return verify_otp(email, otp)
+
+def change_user_password(email, password):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    encrypted_password = hash_password(password)
+
+    cursor.execute(
+        """
+        UPDATE users
+        SET password=%s
+        WHERE email=%s
+        """,
+        (
+            encrypted_password,
+            email
+        )
+    )
+
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+    return True

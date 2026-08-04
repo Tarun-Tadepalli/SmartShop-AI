@@ -16,7 +16,7 @@ import CustomerProfile from "../pages/CustomerProfile";
 import CustomerAIAssistant from "../pages/CustomerAIAssistant";
 import MyOrders from "../pages/MyOrders";
 import TrackOrder from "../pages/TrackOrder";
-
+import ForgotPassword from "../pages/ForgotPassword";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 function AppRoutes() {
@@ -26,6 +26,7 @@ function AppRoutes() {
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
       <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>} />

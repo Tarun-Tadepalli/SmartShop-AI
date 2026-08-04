@@ -2,12 +2,14 @@ import MainLayout from "../components/Mainlayout";
 import { useEffect,useState } from "react";
 import { getAllOrders } from "../services/orderApi";
 import { getProducts } from "../services/productApi";
-import {uploadProfileImage, updateProfileImage, getProfile} from "../services/profileApi";
+import {uploadProfileImage, updateProfileImage, getProfile, getAllUsers, deleteUser} from "../services/profileApi";
 import "../styles/profile.css";
 
 function Profile() {
   const [orders,setOrders] = useState([]);
   const [products,setProducts] = useState([]);
+  const [users,setUsers] = useState([]);
+  const [showUsers,setShowUsers] = useState(false);
   const [showOrders,setShowOrders] = useState(false);
   const [showProducts,setShowProducts] = useState(false);
   const [image,setImage] = useState(null);
@@ -15,7 +17,7 @@ function Profile() {
   const [lastName, setLastName] = useState("");
 
 
-  useEffect(()=>{loadOrders(); loadProducts(); loadProfile();},[]);
+  useEffect(()=>{loadOrders(); loadProducts(); loadProfile(); loadUsers();},[]);
 
   const loadOrders = async()=>{  
     try{
@@ -32,6 +34,55 @@ function Profile() {
       setProducts(response.data);
     }
     catch(error){console.log(error);}
+  };
+
+  const loadUsers = async()=>{
+
+    try{
+
+        const response = await getAllUsers();
+
+        setUsers(response.data);
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+  };
+
+  const handleDeleteUser = async(userId)=>{
+
+    const confirmDelete = window.confirm(
+        "Are you sure you want to delete this user?"
+    );
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+    try{
+
+        const response = await deleteUser(userId);
+
+        alert(response.data.message);
+
+        loadUsers();
+        loadOrders();
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Unable to delete user.");
+
+    }
   };
 
   const loadProfile = async () => {
@@ -208,8 +259,66 @@ function Profile() {
           </tbody>
           </table>
           }
-        </div>
       </div>
+
+      <div className="dropdown-card">
+        <div className="dropdown-header" onClick={()=>setShowUsers(!showUsers)}>
+          ▼ Users Overview
+        </div>
+        {
+
+        showUsers &&
+
+        <table className="profile-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Orders</th>
+                    <th>Returns</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {
+                users.map(user=>(
+                    <tr key={user[0]}>
+                        <td>
+                            {user[1]} {user[2]}
+                        </td>
+                        <td>
+                            {user[3]}
+                        </td>
+                        <td>
+                            {user[4]}
+                        </td>
+                        <td>
+                            {user[5]}
+                        </td>
+                        <td>
+                        {
+                        user[3] === email ?
+                        <span
+                        style={{color:"#6b7280", fontWeight:"600"}}
+                        >
+                          Admin
+                        </span>
+                        :
+                        <button
+                        className="delete-user-btn"
+                        onClick={()=>handleDeleteUser(user[0])}
+                        >
+                          Delete
+                        </button>}
+                        </td>
+                    </tr>
+                ))
+            }
+            </tbody>
+        </table>
+        }
+      </div>
+    </div>
     </MainLayout>
 
 );

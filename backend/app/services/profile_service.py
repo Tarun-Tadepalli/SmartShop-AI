@@ -180,3 +180,117 @@ def get_profile_for_ai(email):
             else "Not Uploaded"
         )
     }
+
+def get_all_users():
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+            u.id,
+            u.first_name,
+            u.last_name,
+            u.email,
+
+            COUNT(o.id) AS total_orders,
+
+            COUNT(
+                CASE
+                    WHEN o.return_status='Returned'
+                    THEN 1
+                END
+            ) AS total_returns
+
+        FROM users u
+
+        LEFT JOIN orders o
+        ON u.email = o.customer_email
+
+        WHERE u.role='customer'
+
+        GROUP BY
+            u.id,
+            u.first_name,
+            u.last_name,
+            u.email
+
+        ORDER BY
+            u.id DESC
+        """
+    )
+
+    users = cursor.fetchall()
+
+    cursor.close()
+
+    connection.close()
+
+    return users
+
+def delete_user(user_id):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT email
+        FROM users
+        WHERE id=%s
+        """,
+        (
+            user_id,
+        )
+    )
+
+    user = cursor.fetchone()
+
+    if not user:
+
+        cursor.close()
+
+        connection.close()
+
+        return {
+            "success": False,
+            "message": "User not found"
+        }
+
+    email = user[0]
+
+    cursor.execute(
+        """
+        DELETE
+        FROM orders
+        WHERE customer_email=%s
+        """,
+        (
+            email,
+        )
+    )
+
+    cursor.execute(
+        """
+        DELETE
+        FROM users
+        WHERE id=%s
+        """,
+        (
+            user_id,
+        )
+    )
+
+    connection.commit()
+
+    cursor.close()
+
+    connection.close()
+
+    return {
+        "success": True,
+        "message": "User Deleted Successfully"
+    }

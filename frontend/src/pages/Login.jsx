@@ -172,6 +172,12 @@ function Login() {
             <p className="error-message">
             {error}
           </p>}
+          <p className="forgot-password">
+            
+            <Link to="/forgot-password">
+              Forgot Password?
+            </Link>
+          </p>
 
             <button type="submit">
               Login
@@ -185,6 +191,8 @@ function Login() {
               Register
             </Link>
           </p>
+
+          
 
         </div>
 

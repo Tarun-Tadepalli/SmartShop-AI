@@ -26,3 +26,11 @@ export const uploadProfileImage = (formData) => {
 export const getProfile = (email) => {
   return API.get(`/${email}`);
 };
+
+export const getAllUsers = () => {
+  return API.get("/admin/users");
+};
+
+export const deleteUser = (userId) => {
+  return API.delete(`/admin/user/${userId}`);
+};
