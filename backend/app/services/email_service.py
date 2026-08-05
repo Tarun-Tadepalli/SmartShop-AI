@@ -43,8 +43,10 @@ SmartShop AI Support Team
 
     print("Resolved IP =", socket.gethostbyname(SMTP_SERVER))
 
-    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=30)
+    server = smtplib.SMTP("smtp.gmail.com", 587, timeout=30)
+    server.ehlo()
     server.starttls()
+    server.ehlo()
     server.login(EMAIL, PASSWORD)
     server.send_message(message)
     server.quit()
