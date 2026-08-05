@@ -2,6 +2,7 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import socket
 
 EMAIL = os.getenv("EMAIL_ADDRESS")
 PASSWORD = os.getenv("EMAIL_PASSWORD")
@@ -36,7 +37,13 @@ SmartShop AI Support Team
 
     message.attach(MIMEText(body, "plain"))
 
-    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+    print("SMTP_SERVER =", SMTP_SERVER)
+    print("SMTP_PORT =", SMTP_PORT)
+    print("EMAIL =", EMAIL)
+
+    print("Resolved IP =", socket.gethostbyname(SMTP_SERVER))
+
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=30)
     server.starttls()
     server.login(EMAIL, PASSWORD)
     server.send_message(message)
