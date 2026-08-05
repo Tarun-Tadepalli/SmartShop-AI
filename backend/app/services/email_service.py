@@ -10,6 +10,7 @@ SMTP_PORT = int(os.getenv("SMTP_PORT"))
 
 
 def send_otp_email(receiver_email, otp):
+
     subject = "SmartShop AI - Password Reset OTP"
 
     body = f"""
@@ -30,14 +31,31 @@ SmartShop AI Support Team
 """
 
     message = MIMEMultipart()
-    message["From"] = f"SmartShop AI Support <{EMAIL}>"
+    message["From"] = f"SmartShop AI <{EMAIL}>"
     message["To"] = receiver_email
     message["Subject"] = subject
-
     message.attach(MIMEText(body, "plain"))
 
-    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-    server.starttls()
-    server.login(EMAIL, PASSWORD)
-    server.send_message(message)
-    server.quit()
+    try:
+        print("Connecting to:", SMTP_SERVER, SMTP_PORT)
+
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=30)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+
+        server.login(EMAIL, PASSWORD)
+
+        server.sendmail(
+            EMAIL,
+            receiver_email,
+            message.as_string()
+        )
+
+        server.quit()
+
+        print("Email Sent Successfully")
+
+    except Exception as e:
+        print("EMAIL ERROR:", str(e))
+        raise
