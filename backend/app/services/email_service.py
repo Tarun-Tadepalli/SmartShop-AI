@@ -43,10 +43,18 @@ SmartShop AI Support Team
 
     print("Resolved IP =", socket.gethostbyname(SMTP_SERVER))
 
-    server = smtplib.SMTP("smtp.gmail.com", 587, timeout=30)
-    server.ehlo()
-    server.starttls()
-    server.ehlo()
-    server.login(EMAIL, PASSWORD)
-    server.send_message(message)
-    server.quit()
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587, timeout=30)
+        print("SMTP Connected")
+
+        server.ehlo()
+        server.starttls()
+        print("TLS Started")
+
+        server.ehlo()
+        server.login(EMAIL, PASSWORD)
+        print("Logged In")
+
+    except Exception as e:
+        print("SMTP ERROR:", repr(e))
+        raise
