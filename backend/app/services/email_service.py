@@ -1,18 +1,32 @@
 import os
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import httpx
+from dotenv import load_dotenv
 
-EMAIL = os.getenv("EMAIL_ADDRESS")
-PASSWORD = os.getenv("EMAIL_PASSWORD")
-SMTP_SERVER = os.getenv("SMTP_SERVER")
-SMTP_PORT = int(os.getenv("SMTP_PORT"))
+load_dotenv()
+
+MAILJET_API_KEY = os.getenv("MAILJET_API_KEY")
+MAILJET_SECRET_KEY = os.getenv("MAILJET_SECRET_KEY")
+SENDER_EMAIL = os.getenv("MAILJET_SENDER_EMAIL")
+SENDER_NAME = os.getenv("MAILJET_SENDER_NAME")
 
 
 def send_otp_email(receiver_email, otp):
-    subject = "SmartShop AI - Password Reset OTP"
+    url = "https://api.mailjet.com/v3.1/send"
 
-    body = f"""
+    payload = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": SENDER_EMAIL,
+                    "Name": SENDER_NAME
+                },
+                "To": [
+                    {
+                        "Email": receiver_email
+                    }
+                ],
+                "Subject": "SmartShop AI - Password Reset OTP",
+                "TextPart": f"""
 Hello,
 
 We received a request to reset your SmartShop AI account password.
@@ -28,16 +42,20 @@ If you did not request this password reset, please ignore this email.
 Regards,
 SmartShop AI Support Team
 """
+            }
+        ]
+    }
 
-    message = MIMEMultipart()
-    message["From"] = f"SmartShop AI Support <{EMAIL}>"
-    message["To"] = receiver_email
-    message["Subject"] = subject
+    response = httpx.post(
+        url,
+        auth=(MAILJET_API_KEY, MAILJET_SECRET_KEY),
+        json=payload,
+        timeout=30
+    )
 
-    message.attach(MIMEText(body, "plain"))
+    if response.status_code != 200:
+        print("Mailjet Error:")
+        print(response.text)
+        raise Exception("Failed to send OTP email")
 
-    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-    server.starttls()
-    server.login(EMAIL, PASSWORD)
-    server.send_message(message)
-    server.quit()
+    print("OTP Email Sent Successfully")
