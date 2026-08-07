@@ -73,9 +73,10 @@ function ForgotPassword() {
           });
       
           if (response.data.success) {
-            alert("Email verified successfully. A 4-digit OTP has been sent to your registered email.");
+            alert("Email verified successfully.");
       
             setEmailVerified(true);
+            setOtpVerified(true);
       
             setTimer(120);
       

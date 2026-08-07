@@ -163,7 +163,6 @@ def verify_email_exists(email):
 def send_password_reset_otp(email):
 
     if not verify_email_exists(email):
-
         return {
             "success": False,
             "message": "Email not registered"
@@ -173,12 +172,17 @@ def send_password_reset_otp(email):
 
     save_otp(email, otp)
 
-    send_otp_email(email, otp)
+    print("\n" + "=" * 60)
+    print(" SMARTSHOP AI - PASSWORD RESET OTP ")
+    print("=" * 60)
+    print(f" Registered Email : {email}")
+    print(f" Generated OTP    : {otp}")
+    print("=" * 60 + "\n")
 
     return {
         "success": True,
-        "message": "OTP sent successfully"
-    }   
+        "message": "Email verified successfully"
+    }
 
 def verify_password_reset_otp(email, otp):
 

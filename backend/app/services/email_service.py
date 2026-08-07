@@ -59,3 +59,5 @@ SmartShop AI Support Team
         raise Exception("Failed to send OTP email")
 
     print("OTP Email Sent Successfully")
+
+
