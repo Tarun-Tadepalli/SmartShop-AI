@@ -25,7 +25,7 @@ def send_otp_email(receiver_email, otp):
                         "Email": receiver_email
                     }
                 ],
-                "Subject": "SmartShop AI - Password Reset OTP",
+                "Subject": "SmartShop AI | Password Reset Verification Code",
                 "TextPart": f"""
 Hello,
 
